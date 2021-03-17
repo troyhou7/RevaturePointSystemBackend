@@ -25,11 +25,6 @@ public class PrizeServiceImpl implements PrizeService{
 
     @Override
     public Prize getPrizeById(int id) {
-<<<<<<< Updated upstream
-        return this.prizeRepo.findById(id).get();
-    }
-
-=======
         try {
             Prize p = this.prizeRepo.findById(id).get();
             return p;
@@ -38,7 +33,7 @@ public class PrizeServiceImpl implements PrizeService{
             return null;
         }
     }
->>>>>>> Stashed changes
+
 
     @Override
     public Set<Prize> getAllPrizes() {
