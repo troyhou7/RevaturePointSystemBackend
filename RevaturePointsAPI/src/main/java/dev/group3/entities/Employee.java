@@ -25,7 +25,7 @@ public class Employee {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "emp_password")
     private String password;
 
     @Column(name = "current_rp")
@@ -38,7 +38,10 @@ public class Employee {
     private int batchId;
 
 
-    @OneToMany(mappedBy = "employeeId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "employee_prize",
+            joinColumns = { @JoinColumn(name = "employee_id")},
+            inverseJoinColumns = {@JoinColumn(name = "prize_id")})
     private Set<Prize> prizes = new HashSet<>();
 
 
@@ -125,6 +128,14 @@ public class Employee {
 
     public void setBatchId(int batchId) {
         this.batchId = batchId;
+    }
+
+    public Set<Prize> getPrizes() {
+        return prizes;
+    }
+
+    public void setPrizes(Set<Prize> prizes) {
+        this.prizes = prizes;
     }
 
     @Override

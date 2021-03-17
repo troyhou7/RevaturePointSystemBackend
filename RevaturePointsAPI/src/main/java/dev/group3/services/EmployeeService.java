@@ -1,6 +1,7 @@
 package dev.group3.services;
 
 import dev.group3.entities.Employee;
+import dev.group3.entities.Prize;
 
 import java.util.Set;
 
@@ -11,6 +12,8 @@ public interface EmployeeService {
     Employee getEmployeeById(int id);
     Set<Employee> getEmployeesByBatch(int batchId);
     Set<Employee> getAllEmployees();
+
+    Set<Prize> getEmployeePrizes(int id);
 
     Employee updateEmployee(Employee employee);
 

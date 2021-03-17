@@ -9,7 +9,6 @@ public interface PrizeService {
     Prize createPrize(Prize prize);
 
     Prize getPrizeById(int id);
-    Set<Prize> getPrizesByEmployeeId(int employeeId);
     Set<Prize> getAllPrizes();
 
     Prize updatePrize(Prize prize);
