@@ -13,11 +13,18 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.boot:spring-boot-starter-jdbc'
+	compile 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	compile group: 'org.springframework', name: 'spring-aop', version: '5.3.5'
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '3.7.7'
+	testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.7.7'
+	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	compile group: 'com.auth0', name: 'java-jwt', version: '3.12.1'
 }
 
 test {

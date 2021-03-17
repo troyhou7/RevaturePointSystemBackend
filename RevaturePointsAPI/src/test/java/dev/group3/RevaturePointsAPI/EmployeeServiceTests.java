@@ -26,21 +26,7 @@ public class EmployeeServiceTests {
     @Autowired
     EmployeeRepo employeeRepo;
 
-//      //Don't need yet
-//    @Test
-//    @Order(1)
-//    @Rollback
-//    void create_prizes(){
-//        Prize p1 = new Prize(0,"Trip",100000,"Trip to Hawaii");
-//        Prize p2 = new Prize(0,"Trip",100000,"Trip to Hawaii");
-//        Prize p3 = new Prize(0,"Trip",100000,"Trip to Hawaii");
-//        Prize p4 = new Prize(0,"Car",200000,"Honda Civic");
-//
-//        prizeRepo.save(p1);
-//        prizeRepo.save(p2);
-//        prizeRepo.save(p3);
-//        prizeRepo.save(p4);
-//    }
+
 
     @Test
     void get_prizes_by_employee_id(){

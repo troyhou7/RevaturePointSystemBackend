@@ -36,7 +36,6 @@ class RevaturePointsApiApplicationTests {
 		System.out.println(e1.getPrizes());
 	}
 
-	// Needs implementation in services
 	@Test
 	void give_employee_prize(){
 		Prize p1 = this.prizeRepo.findById(1).get();
