@@ -11,27 +11,23 @@ public class Prize {
     @Column(name = "prize_id")
     private int prizeId;
 
-    @Column(name = "name")
+    @Column(name = "prize_name")
     private String name;
 
-    @Column(name = "cost")
+    @Column(name = "prize_cost")
     private double cost;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "employee_id")
-    @JoinColumn(name ="employee_id")
-    private int employeeId;
 
     public Prize(){}
 
-    public Prize(int prizeId, String name, double cost, String description, int employeeId) {
+    public Prize(int prizeId, String name, double cost, String description) {
         this.prizeId = prizeId;
         this.name = name;
         this.cost = cost;
         this.description = description;
-        this.employeeId = employeeId;
     }
 
     public int getPrizeId() {
@@ -66,13 +62,6 @@ public class Prize {
         this.description = description;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
-    }
 
     @Override
     public String toString() {
@@ -81,7 +70,6 @@ public class Prize {
                 ", name='" + name + '\'' +
                 ", cost=" + cost +
                 ", description='" + description + '\'' +
-                ", employeeId=" + employeeId +
                 '}';
     }
 }
