@@ -9,6 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 public class LoginController {
@@ -18,8 +23,9 @@ public class LoginController {
 
     @Logged
     @PostMapping("/login")
-    String login(@RequestBody Employee employee) {
+    String login(@RequestBody Employee employee) throws IOException {
         Employee returnEmployee = this.employeeService.getEmployeeByUsername(employee.getUsername());
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         if (returnEmployee!= null){
             if(returnEmployee.getPassword().equals(employee.getPassword())) {
                 int id = returnEmployee.getEmployeeId();
@@ -29,9 +35,11 @@ public class LoginController {
                 String jwt = JwtUtil.generate(id, firstName, lastName, role);
                 return jwt;
             } else{
+                response.sendError(400, "Invalid password");
                 return "Invalid password";
             }
         } else {
+            response.sendError(404, "User: " + employee.getUsername() + " not found");
             return "User not found";
         }
     }
