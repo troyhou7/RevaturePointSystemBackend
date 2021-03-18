@@ -16,6 +16,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.mockito.ArgumentMatchers.anyString;
+
 @SpringBootTest(classes=RevaturePointsApiApplication.class)
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceTests {
@@ -62,15 +64,10 @@ public class EmployeeServiceTests {
                 });
 
         //TODO Delete mocking
-        Mockito.when(employeeRepo.delete(Mockito.any(Employee.class)))
-                .then(i -> {
-                    return employees.remove(i.getArguments()[0]);
-                });
-
-        Mockito.when(employeeRepo.delete(Mockito.any(Employee.class)))
-                .then(i -> {
-                    return employees.remove(i.getArguments()[0]);
-                });
+//        Mockito.when(employeeRepo.delete(Mockito.any(Employee.class)))
+//                .then(i -> {
+//                    return employees.remove(i.getArguments()[0]);
+//                });
 
         Mockito.when(employeeRepo.findByUsernameAndPassword(anyString(), anyString()))
                 .then(i -> {
@@ -147,5 +144,16 @@ public class EmployeeServiceTests {
     void deleteEmployeeByIdTest() {
         Assertions.assertTrue(employeeService.deleteEmployeeById(1));
         Assertions.assertNull(employeeService.getEmployeeById(1));
+    }
+
+    @Test
+    void getEmployeeByUserPassTest() {
+        Employee employee = employeeRepo.findByUsernameAndPassword("", "");
+
+        Assertions.assertNull(employee);
+
+        employee = employeeRepo.findByUsernameAndPassword("XZhen", "password");
+
+        Assertions.assertNotNull(employee);
     }
 }
