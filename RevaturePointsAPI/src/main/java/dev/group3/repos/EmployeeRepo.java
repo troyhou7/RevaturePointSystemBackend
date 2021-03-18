@@ -5,8 +5,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.Set;
+
 @Component
 @Repository
 public interface EmployeeRepo extends CrudRepository<Employee,Integer> {
 
+    Set<Employee> findByBatch(int batchId);
 }
