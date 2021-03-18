@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Set<Employee> getEmployeesByBatch(int batchId) {
-        Set<Employee> batch = employeeRepo.findByBatch(batchId);
+        Set<Employee> batch = employeeRepo.findByBatchId(batchId);
         return batch;
     }
 
