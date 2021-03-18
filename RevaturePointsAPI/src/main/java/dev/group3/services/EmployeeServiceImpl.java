@@ -1,5 +1,6 @@
 package dev.group3.services;
 
+import dev.group3.aspects.Logged;
 import dev.group3.entities.Employee;
 import dev.group3.entities.Prize;
 import dev.group3.repos.EmployeeRepo;
@@ -19,11 +20,13 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Autowired
     EmployeeRepo employeeRepo;
 
+    @Logged
     @Override
     public Employee registerEmployee(Employee employee) {
         return employeeRepo.save(employee);
     }
 
+    @Logged
     @Override
     public Employee getEmployeeById(int id) {
         try{
@@ -35,39 +38,51 @@ public class EmployeeServiceImpl implements EmployeeService{
         }
     }
 
+    @Logged
     @Override
     public Set<Employee> getEmployeesByBatch(int batchId) {
         Set<Employee> batch = employeeRepo.findByBatchId(batchId);
         return batch;
     }
 
+    @Logged
     @Override
     public Set<Employee> getAllEmployees() {
         return new HashSet<Employee>((Collection<Employee>) employeeRepo.findAll());
     }
 
+
+    @Logged
     @Override
     public Employee getEmployeeByUserPass(String username, String password) {
         return employeeRepo.findByUsernameAndPassword(username, password);
     }
 
-    //TODO Add getEmployeeByUserPass
-
+    @Logged
     @Override
     public Set<Prize> getEmployeePrizes(int id) {
-        return this.employeeRepo.findById(id).get().getPrizes();
-    }
-
-    @Override
-    public Employee updateEmployee(Employee employee) {
-        boolean employeeExists = employeeRepo.existsById(employee.getEmployeeId());
-        if(employeeExists) {
-            return employeeRepo.save(employee);
-        }else{
+        try{
+            Set<Prize> prizes = this.employeeRepo.findById(id).get().getPrizes();
+            return prizes;
+        }catch(NoSuchElementException e){
+            e.printStackTrace();
             return null;
         }
     }
 
+    @Logged
+    @Override
+    public Employee updateEmployee(Employee employee) {
+        try{
+            Employee employeeExists = employeeRepo.findById(employee.getEmployeeId()).get();
+            return employeeRepo.save(employee);
+        }catch (NoSuchElementException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Logged
     @Override
     public boolean deleteEmployeeById(int id) {
         try {
@@ -76,7 +91,6 @@ public class EmployeeServiceImpl implements EmployeeService{
             return true;
         }
         catch (IllegalArgumentException e){
-            //TODO do we need to logg this? Yes, we'll use an aspect
             e.printStackTrace();
             return false;
         }catch (NoSuchElementException e){
@@ -85,6 +99,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         }
     }
 
+    @Logged
     @Override
     public Employee getEmployeeByUsername(String username) {
         try {
