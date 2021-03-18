@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -18,22 +20,23 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee registerEmployee(Employee employee) {
-        return null;
+        return employeeRepo.save(employee);
     }
 
     @Override
     public Employee getEmployeeById(int id) {
-        return null;
+        return employeeRepo.findById(id).get();
     }
 
     @Override
     public Set<Employee> getEmployeesByBatch(int batchId) {
-        return null;
+        Set<Employee> batch = employeeRepo.findByBatch(batchId);
+        return batch;
     }
 
     @Override
     public Set<Employee> getAllEmployees() {
-        return null;
+        return new HashSet<Employee>((Collection<Employee>) employeeRepo.findAll());
     }
 
     public Set<Prize> getEmployeePrizes(int id) {
@@ -42,11 +45,20 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee updateEmployee(Employee employee) {
-        return null;
+        return employeeRepo.save(employee);
     }
 
     @Override
     public boolean deleteEmployeeById(int id) {
-        return false;
+        try {
+            Employee employee = employeeRepo.findById(id).get();
+            employeeRepo.delete(employee);
+            return true;
+        }
+        catch (IllegalArgumentException e){
+            //TODO do we need to logg this?
+            e.printStackTrace();
+            return false;
+        }
     }
 }
