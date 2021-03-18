@@ -32,6 +32,8 @@ public class LoggingAspect {
         }else if(obj.equals(false)){
             logger.error(pjp.getSignature().toString() + " returned false");
             logger.error("Unable to delete");
+        }else if(obj instanceof String) {
+            logger.error(obj);
         }else{
             logger.info(pjp.getSignature().toString() + " executed successfully");
             logger.info("Return: " + obj);

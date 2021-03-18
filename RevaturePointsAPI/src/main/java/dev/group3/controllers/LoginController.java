@@ -1,6 +1,7 @@
 package dev.group3.controllers;
 
 
+import dev.group3.aspects.Logged;
 import dev.group3.entities.Employee;
 import dev.group3.services.EmployeeService;
 import dev.group3.utils.JwtUtil;
@@ -15,16 +16,21 @@ public class LoginController {
     @Autowired
     EmployeeService employeeService;
 
+    @Logged
     @PostMapping("/login")
     String login(@RequestBody Employee employee) {
         Employee returnEmployee = this.employeeService.getEmployeeByUsername(employee.getUsername());
-        if (returnEmployee!= null && returnEmployee.getPassword().equals(employee.getPassword())) {
-            int id = returnEmployee.getEmployeeId();
-            String firstName = returnEmployee.getFname();
-            String lastName = returnEmployee.getLname();
-            String role = returnEmployee.getRole();
-            String jwt = JwtUtil.generate(id, firstName, lastName, role);
-            return jwt;
+        if (returnEmployee!= null){
+            if(returnEmployee.getPassword().equals(employee.getPassword())) {
+                int id = returnEmployee.getEmployeeId();
+                String firstName = returnEmployee.getFname();
+                String lastName = returnEmployee.getLname();
+                String role = returnEmployee.getRole();
+                String jwt = JwtUtil.generate(id, firstName, lastName, role);
+                return jwt;
+            } else{
+                return "Invalid password";
+            }
         } else {
             return "User not found";
         }
