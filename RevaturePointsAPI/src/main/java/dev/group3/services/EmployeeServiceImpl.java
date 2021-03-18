@@ -46,6 +46,11 @@ public class EmployeeServiceImpl implements EmployeeService{
         return new HashSet<Employee>((Collection<Employee>) employeeRepo.findAll());
     }
 
+    @Override
+    public Employee getEmployeeByUserPass(String username, String password) {
+        return employeeRepo.findByUsernameAndPassword(username, password);
+    }
+
     //TODO Add getEmployeeByUserPass
 
     @Override
