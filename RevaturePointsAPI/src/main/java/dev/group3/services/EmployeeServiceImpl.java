@@ -54,6 +54,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Logged
     @Override
+    public Employee getEmployeeByUserPass(String username, String password) {
+        return employeeRepo.findByUsernameAndPassword(username, password);
+    }
+
+    @Logged
+    @Override
     public Set<Prize> getEmployeePrizes(int id) {
         try{
             Set<Prize> prizes = this.employeeRepo.findById(id).get().getPrizes();
@@ -93,6 +99,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         }
     }
 
+    @Logged
     @Override
     public Employee getEmployeeByUsername(String username) {
         try {
