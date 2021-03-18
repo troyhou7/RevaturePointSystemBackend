@@ -11,5 +11,7 @@ import java.util.Set;
 @Repository
 public interface EmployeeRepo extends CrudRepository<Employee,Integer> {
 
-    Set<Employee> findByBatch(int batchId);
+    Set<Employee> findByBatchId(int batchId);
+    Employee findEmployeeByUsername(String username);
+
 }

@@ -50,8 +50,8 @@ public class EmployeeServiceTests {
         Mockito.when(employeeRepo.findById(2)).thenReturn(java.util.Optional.of(e2));
         Mockito.when(employeeRepo.findById(3)).thenReturn(java.util.Optional.of(e3));
 
-        Mockito.when(employeeRepo.findByBatch(1)).thenReturn(batch1);
-        Mockito.when(employeeRepo.findByBatch(2)).thenReturn(batch2);
+        Mockito.when(employeeRepo.findByBatchId(1)).thenReturn(batch1);
+        Mockito.when(employeeRepo.findByBatchId(2)).thenReturn(batch2);
 
         //mocks the employeeRepo.save by saving the value to the mocked employees HashSet (in a lambda)
         Mockito.when(employeeRepo.save(Mockito.any(Employee.class)))
@@ -92,12 +92,12 @@ public class EmployeeServiceTests {
 
     @Test
     void registerEmployeeTest() {
-        int batchsize1 = employeeRepo.findByBatch(2).size();
+        int batchsize1 = employeeRepo.findByBatchId(2).size();
 
         Employee mike = new Employee(0, "Associate", "Michael", "Bennett", "MBennett", "12345", 0, 0, 2);
         employeeRepo.save(mike);
 
-        int batchsize2 = employeeRepo.findByBatch(2).size();
+        int batchsize2 = employeeRepo.findByBatchId(2).size();
         Assertions.assertEquals(1, batchsize2 -batchsize1);
     }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Component
@@ -25,12 +26,18 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee getEmployeeById(int id) {
-        return employeeRepo.findById(id).get();
+        try{
+            Employee employee = employeeRepo.findById(id).get();
+            return employee;
+        }catch (NoSuchElementException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public Set<Employee> getEmployeesByBatch(int batchId) {
-        Set<Employee> batch = employeeRepo.findByBatch(batchId);
+        Set<Employee> batch = employeeRepo.findByBatchId(batchId);
         return batch;
     }
 
@@ -39,13 +46,21 @@ public class EmployeeServiceImpl implements EmployeeService{
         return new HashSet<Employee>((Collection<Employee>) employeeRepo.findAll());
     }
 
+    //TODO Add getEmployeeByUserPass
+
+    @Override
     public Set<Prize> getEmployeePrizes(int id) {
         return this.employeeRepo.findById(id).get().getPrizes();
     }
 
     @Override
     public Employee updateEmployee(Employee employee) {
-        return employeeRepo.save(employee);
+        boolean employeeExists = employeeRepo.existsById(employee.getEmployeeId());
+        if(employeeExists) {
+            return employeeRepo.save(employee);
+        }else{
+            return null;
+        }
     }
 
     @Override
@@ -56,9 +71,24 @@ public class EmployeeServiceImpl implements EmployeeService{
             return true;
         }
         catch (IllegalArgumentException e){
-            //TODO do we need to logg this?
+            //TODO do we need to logg this? Yes, we'll use an aspect
             e.printStackTrace();
             return false;
+        }catch (NoSuchElementException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public Employee getEmployeeByUsername(String username) {
+        try {
+            Employee employee = employeeRepo.findEmployeeByUsername(username);
+            return employee;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

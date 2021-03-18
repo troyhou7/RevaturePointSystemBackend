@@ -150,6 +150,7 @@ public class Employee {
                 ", currentRevaPoints=" + currentRevaPoints +
                 ", allTimeRevaPoints=" + allTimeRevaPoints +
                 ", batchId=" + batchId +
+                ", prizes=" + prizes +
                 '}';
     }
 }
