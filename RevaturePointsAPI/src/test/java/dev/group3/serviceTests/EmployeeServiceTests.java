@@ -62,10 +62,26 @@ public class EmployeeServiceTests {
                 });
 
         //TODO Delete mocking
-//        Mockito.when(employeeRepo.delete(Mockito.any(Employee.class)))
-//                .then(i -> {
-//                    return employees.remove(i.getArguments()[0]);
-//                });
+        Mockito.when(employeeRepo.delete(Mockito.any(Employee.class)))
+                .then(i -> {
+                    return employees.remove(i.getArguments()[0]);
+                });
+
+        Mockito.when(employeeRepo.delete(Mockito.any(Employee.class)))
+                .then(i -> {
+                    return employees.remove(i.getArguments()[0]);
+                });
+
+        Mockito.when(employeeRepo.findByUsernameAndPassword(anyString(), anyString()))
+                .then(i -> {
+                    String u = (String) i.getArguments()[0];
+                    String p = (String) i.getArguments()[1];
+
+                    if (u.equals("PHoskovec") && p.equals("password")) return e1;
+                    if (u.equals("XZhen") && p.equals("password")) return e2;
+                    if (u.equals("THouston") && p.equals("password")) return e3;
+                    return null;
+                });
     }
 
     @Test
