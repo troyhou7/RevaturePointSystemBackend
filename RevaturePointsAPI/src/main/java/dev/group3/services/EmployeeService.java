@@ -20,4 +20,6 @@ public interface EmployeeService {
 
     boolean deleteEmployeeById(int id);
 
+    Employee getEmployeeByUsername(String username);
+
 }
