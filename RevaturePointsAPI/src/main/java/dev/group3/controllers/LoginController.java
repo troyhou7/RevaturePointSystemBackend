@@ -1,6 +1,7 @@
 package dev.group3.controllers;
 
 
+import dev.group3.aspects.Logged;
 import dev.group3.entities.Employee;
 import dev.group3.models.UserAndPassword;
 import dev.group3.models.UserAuthentication;

@@ -22,11 +22,16 @@ public class EmployeeController {
 
     @CrossOrigin
     @PostMapping("/employee")
-    public Employee registerEmployee(@RequestBody Employee employee){
-        this.employeeService.registerEmployee(employee);
+    public Employee registerEmployee(@RequestBody Employee employee) throws IOException {
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-        response.setStatus(201);
-        return employee;
+        try {
+            this.employeeService.registerEmployee(employee);
+            response.setStatus(201);
+            return employee;
+        } catch (Exception e) {
+            response.sendError(400, "Register failed");
+            return null;
+        }
     }
 
     @CrossOrigin
