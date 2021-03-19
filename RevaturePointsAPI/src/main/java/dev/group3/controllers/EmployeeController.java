@@ -1,9 +1,10 @@
 package dev.group3.controllers;
 
+import dev.group3.aspects.AuthorizedAssociate;
+import dev.group3.aspects.AuthorizedTrainer;
 import dev.group3.entities.Employee;
 import dev.group3.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -29,26 +30,29 @@ public class EmployeeController {
         return employee;
     }
 
+    @AuthorizedAssociate
     @GetMapping("/employee")
     public Set<Employee> getAllEmployees(){
         Set<Employee> employees = this.employeeService.getAllEmployees();
         return employees;
     }
 
+    @AuthorizedAssociate
     @CrossOrigin
     @GetMapping("/employee/{id}")
     public Employee getEmployeeById(@PathVariable int id) throws IOException {
         Employee employee = this.employeeService.getEmployeeById(id);
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-        if(employee != null)
+        if(employee != null){
             return employee;
+        }
         else{
             response.sendError(404,"Employee of ID " + id + " not found");
             return null;
         }
     }
 
-
+    @AuthorizedAssociate
     @GetMapping("/batch/{id}")
     public Set<Employee> getEmployeesByBatchId(@PathVariable int id) throws IOException {
         Set<Employee> employees = this.employeeService.getEmployeesByBatch(id);
@@ -59,6 +63,7 @@ public class EmployeeController {
         return employees;
     }
 
+    @AuthorizedAssociate
     @PutMapping("/employee/{id}")
     public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) throws IOException {
         employee.setEmployeeId(id);
@@ -71,6 +76,8 @@ public class EmployeeController {
             return updatedEmployee;
         }
     }
+
+    @AuthorizedTrainer
     @DeleteMapping("/employee/{id}")
     public Boolean deleteEmployeeById(@PathVariable int id) throws IOException {
         Boolean result = this.employeeService.deleteEmployeeById(id);
@@ -80,5 +87,4 @@ public class EmployeeController {
         }
         return result;
     }
-
 }

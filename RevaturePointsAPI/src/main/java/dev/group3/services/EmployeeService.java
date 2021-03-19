@@ -12,6 +12,7 @@ public interface EmployeeService {
     Employee getEmployeeById(int id);
     Set<Employee> getEmployeesByBatch(int batchId);
     Set<Employee> getAllEmployees();
+    Employee getEmployeeByUserPass(String username, String password);
 
     Set<Prize> getEmployeePrizes(int id);
 
