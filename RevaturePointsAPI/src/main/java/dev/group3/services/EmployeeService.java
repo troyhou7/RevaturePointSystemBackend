@@ -13,7 +13,7 @@ public interface EmployeeService {
     Set<Employee> getEmployeesByBatch(int batchId);
     Set<Employee> getAllEmployees();
     Employee getEmployeeByUserPass(String username, String password);
-    Set<Employee> getEmployeesByRoll(String roll);
+    Set<Employee> getEmployeesByRole(String role);
 
     Set<Prize> getEmployeePrizes(int id);
 

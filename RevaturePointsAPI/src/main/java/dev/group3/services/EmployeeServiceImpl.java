@@ -60,8 +60,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Set<Employee> getEmployeesByRoll(String roll) {
-        return employeeRepo.findByRoll(roll);
+    public Set<Employee> getEmployeesByRole(String role) {
+        return employeeRepo.findByRole(role);
     }
 
     @Logged
