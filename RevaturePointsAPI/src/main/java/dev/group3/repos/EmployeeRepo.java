@@ -14,5 +14,6 @@ public interface EmployeeRepo extends CrudRepository<Employee,Integer> {
     Set<Employee> findByBatchId(int batchId);
     Employee findEmployeeByUsername(String username);
     Employee findByUsernameAndPassword(String username, String password);
+    Set<Employee> findByRoll(String role);
 
 }

@@ -64,6 +64,17 @@ public class EmployeeController {
     }
 
     @AuthorizedAssociate
+    @GetMapping("/roll/{id}")
+    public Set<Employee> getEmployeesByRoll(@PathVariable String roll) throws IOException {
+        Set<Employee> employees = this.employeeService.getEmployeesByRoll(roll);
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        if(employees.size() == 0){
+            response.sendError(404, "No employees with roll " + roll);
+        }
+        return employees;
+    }
+
+    @AuthorizedAssociate
     @PutMapping("/employee/{id}")
     public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) throws IOException {
         employee.setEmployeeId(id);
