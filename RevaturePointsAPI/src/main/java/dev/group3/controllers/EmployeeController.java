@@ -40,6 +40,7 @@ public class EmployeeController {
 
     @CrossOrigin
     @AuthorizedAssociate
+    @CrossOrigin
     @GetMapping("/employee/{id}")
     public Employee getEmployeeById(@PathVariable int id) throws IOException {
         Employee employee = this.employeeService.getEmployeeById(id);
@@ -66,6 +67,17 @@ public class EmployeeController {
     }
 
     @CrossOrigin
+    @AuthorizedAssociate
+    @GetMapping("/roll/{id}")
+    public Set<Employee> getEmployeesByRoll(@PathVariable String roll) throws IOException {
+        Set<Employee> employees = this.employeeService.getEmployeesByRoll(roll);
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        if(employees.size() == 0){
+            response.sendError(404, "No employees with roll " + roll);
+        }
+        return employees;
+    }
+
     @AuthorizedAssociate
     @PutMapping("/employee/{id}")
     public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) throws IOException {

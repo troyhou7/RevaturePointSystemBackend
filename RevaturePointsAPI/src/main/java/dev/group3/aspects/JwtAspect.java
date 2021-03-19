@@ -48,7 +48,6 @@ public class JwtAspect {
         Logger logger = Logger.getLogger(pjp.getSignature().toString());
         String jwt = request.getHeader("Authorization");
         DecodedJWT decodedJWT = JwtUtil.verifyToken(jwt);
-
         if(decodedJWT == null){
             logger.error("Illegal attempt to access endpoint made");
             logger.error("Method illegally called: " + pjp.getSignature());
