@@ -3,6 +3,7 @@ package dev.group3.controllers;
 import dev.group3.entities.Employee;
 import dev.group3.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,6 +20,7 @@ public class EmployeeController {
 
     //TODO Add logging and security aspects
 
+    @CrossOrigin
     @PostMapping("/employee")
     public Employee registerEmployee(@RequestBody Employee employee){
         this.employeeService.registerEmployee(employee);
@@ -33,6 +35,7 @@ public class EmployeeController {
         return employees;
     }
 
+    @CrossOrigin
     @GetMapping("/employee/{id}")
     public Employee getEmployeeById(@PathVariable int id) throws IOException {
         Employee employee = this.employeeService.getEmployeeById(id);
