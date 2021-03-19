@@ -31,7 +31,7 @@ public class EmployeeServiceTests {
     @BeforeEach
     void beforeAll() {
         Employee e1 = new Employee(1,"Associate", "Parker", "Hoskovec", "PHoskovec", "password", 0, 0, 1);
-        Employee e2 = new Employee(1,"Associate", "Xianbin", "Zhen", "XZhen", "password", 0, 0, 1);
+        Employee e2 = new Employee(1,"Trainer", "Xianbin", "Zhen", "XZhen", "password", 0, 0, 1);
         Employee e3 = new Employee(1,"Associate", "Troy", "Houston", "THouston", "password", 0, 0, 2);
 
         Set<Employee> employees = new HashSet<>();
@@ -45,6 +45,13 @@ public class EmployeeServiceTests {
 
         Set<Employee> batch2 = new HashSet<>();
         batch2.add(e3);
+
+        Set<Employee> trainers = new HashSet<>();
+        trainers.add(e2);
+
+        Set<Employee> associates = new HashSet<>();
+        associates.add(e1);
+        associates.add(e3);
 
         Set<Prize> prizes = new HashSet<>();
         prizes.add(new Prize(1, "Reva Points", 500, "reva points for reva points?"));
@@ -60,6 +67,9 @@ public class EmployeeServiceTests {
 
         Mockito.when(employeeRepo.findByBatchId(1)).thenReturn(batch1);
         Mockito.when(employeeRepo.findByBatchId(2)).thenReturn(batch2);
+
+        Mockito.when((employeeRepo.findByRoll("Trainer"))).thenReturn(trainers);
+        Mockito.when((employeeRepo.findByRoll("Associate"))).thenReturn(associates);
 
         //mocks the employeeRepo.save by saving the value to the mocked employees HashSet (in a lambda)
         Mockito.when(employeeRepo.save(Mockito.any(Employee.class)))
@@ -122,6 +132,19 @@ public class EmployeeServiceTests {
 
         Assertions.assertNotNull(employees);
         Assertions.assertEquals(3, employees.size());
+    }
+
+    @Test
+    void getAllEmployeesByRollTest() {
+        Set<Employee> employees = employeeService.getEmployeesByRoll("Associate");
+
+        Assertions.assertNotNull(employees);
+        Assertions.assertEquals(2, employees.size());
+
+        employees = employeeService.getEmployeesByRoll("Trainer");
+
+        Assertions.assertNotNull(employees);
+        Assertions.assertEquals(1, employees.size());
     }
 
     @Test
