@@ -68,8 +68,8 @@ public class EmployeeServiceTests {
         Mockito.when(employeeRepo.findByBatchId(1)).thenReturn(batch1);
         Mockito.when(employeeRepo.findByBatchId(2)).thenReturn(batch2);
 
-        Mockito.when((employeeRepo.findByRoll("Trainer"))).thenReturn(trainers);
-        Mockito.when((employeeRepo.findByRoll("Associate"))).thenReturn(associates);
+        Mockito.when((employeeRepo.findByRole("Trainer"))).thenReturn(trainers);
+        Mockito.when((employeeRepo.findByRole("Associate"))).thenReturn(associates);
 
         //mocks the employeeRepo.save by saving the value to the mocked employees HashSet (in a lambda)
         Mockito.when(employeeRepo.save(Mockito.any(Employee.class)))
@@ -136,12 +136,12 @@ public class EmployeeServiceTests {
 
     @Test
     void getAllEmployeesByRollTest() {
-        Set<Employee> employees = employeeService.getEmployeesByRoll("Associate");
+        Set<Employee> employees = employeeService.getEmployeesByRole("Associate");
 
         Assertions.assertNotNull(employees);
         Assertions.assertEquals(2, employees.size());
 
-        employees = employeeService.getEmployeesByRoll("Trainer");
+        employees = employeeService.getEmployeesByRole("Trainer");
 
         Assertions.assertNotNull(employees);
         Assertions.assertEquals(1, employees.size());
