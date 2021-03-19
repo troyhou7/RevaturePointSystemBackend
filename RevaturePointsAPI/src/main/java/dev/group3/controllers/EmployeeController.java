@@ -72,7 +72,7 @@ public class EmployeeController {
 
     @CrossOrigin
     @AuthorizedAssociate
-    @GetMapping("/employee/{role}")
+    @GetMapping("/role/{role}")
     public Set<Employee> getEmployeesByRole(@PathVariable String role) throws IOException {
         Set<Employee> employees = this.employeeService.getEmployeesByRole(role);
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
