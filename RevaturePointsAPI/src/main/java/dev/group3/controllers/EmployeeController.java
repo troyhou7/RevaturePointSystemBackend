@@ -3,6 +3,7 @@ package dev.group3.controllers;
 import dev.group3.aspects.AuthorizedAssociate;
 import dev.group3.aspects.AuthorizedTrainer;
 import dev.group3.entities.Employee;
+import dev.group3.entities.Prize;
 import dev.group3.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +67,7 @@ public class EmployeeController {
 
     @CrossOrigin
     @AuthorizedAssociate
-    @GetMapping("/role/{role}")
+    @GetMapping("/employee/{role}")
     public Set<Employee> getEmployeesByRole(@PathVariable String role) throws IOException {
         Set<Employee> employees = this.employeeService.getEmployeesByRole(role);
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
@@ -75,7 +76,24 @@ public class EmployeeController {
         }
         return employees;
     }
+    
+    @CrossOrigin
+    @AuthorizedAssociate
+    @GetMapping("/employee/{id}/prizes")
+    public Set<Prize> getEmployeePrizes(@PathVariable int id) throws IOException {
+        Set<Prize> prizes = this.employeeService.getEmployeePrizes(id);
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        if(prizes != null) {
+            if (prizes.size() == 0) {
+                response.sendError(404, "This employee has no prizes");
+            }
+            return prizes;
+        }
+        response.sendError(404, "Employee not found");
+        return null;
+    }
 
+    @CrossOrigin
     @AuthorizedAssociate
     @PutMapping("/employee/{id}")
     public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) throws IOException {

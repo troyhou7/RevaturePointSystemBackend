@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "employee")
-@JsonIgnoreProperties(value = { "password" }) // making it so passwords will not be passed around in JSON
+//@JsonIgnoreProperties(value = { "password" }) // making it so passwords will not be passed around in JSON
 public class Employee {
 
     @Id
