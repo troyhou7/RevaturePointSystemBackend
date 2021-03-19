@@ -47,13 +47,12 @@ public class JwtAspect {
         Logger logger = Logger.getLogger(pjp.getSignature().toString());
         String jwt = request.getHeader("Authorization");
         DecodedJWT decodedJWT = JwtUtil.verifyToken(jwt);
-
         if(decodedJWT == null){
             logger.error("Illegal attempt to access endpoint made");
             logger.error("Method illegally called: " + pjp.getSignature());
             response.sendError(403);
             return null;
-        }else if(!decodedJWT.getClaim("role").equals("trainer")){
+        }else if(!decodedJWT.getClaim("role").asString().equals("trainer")){
             logger.error("Improper permissions to access that endpoint");
             logger.error("Attempt made by employee " + decodedJWT.getClaim("firstName") + " " +decodedJWT.getClaim("lastName") + ", EmployeeID: "+decodedJWT.getClaim("employeeId"));
             logger.error("Method they attempted to access: " + pjp.getSignature());

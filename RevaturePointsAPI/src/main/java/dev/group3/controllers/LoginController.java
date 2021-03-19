@@ -2,10 +2,10 @@ package dev.group3.controllers;
 
 
 import dev.group3.entities.Employee;
+import dev.group3.models.UserAndPassword;
 import dev.group3.models.UserAuthentication;
 import dev.group3.services.EmployeeService;
 import dev.group3.utils.JwtUtil;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,12 +26,12 @@ public class LoginController {
 
     @CrossOrigin
     @PostMapping("/login")
-    UserAuthentication login(@RequestBody Employee employee) {
-        String username = employee.getUsername();
+    UserAuthentication login(@RequestBody UserAndPassword user) {
+        String username = user.getUsername();
         Employee returnEmployee = this.employeeService.getEmployeeByUsername(username);
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         if (returnEmployee!= null) {
-            if (returnEmployee.getPassword().equals(employee.getPassword())) {
+            if (returnEmployee.getPassword().equals(user.getPassword())) {
                 int id = returnEmployee.getEmployeeId();
                 String firstName = returnEmployee.getFname();
                 String lastName = returnEmployee.getLname();
