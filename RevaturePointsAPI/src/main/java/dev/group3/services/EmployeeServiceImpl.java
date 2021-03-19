@@ -58,6 +58,11 @@ public class EmployeeServiceImpl implements EmployeeService{
         return employeeRepo.findByUsernameAndPassword(username, password);
     }
 
+    @Override
+    public Set<Employee> getEmployeesByRoll(String roll) {
+        return employeeRepo.findByRoll(roll);
+    }
+
     @Logged
     @Override
     public Set<Prize> getEmployeePrizes(int id) {
