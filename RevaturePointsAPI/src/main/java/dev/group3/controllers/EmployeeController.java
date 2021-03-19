@@ -21,6 +21,7 @@ public class EmployeeController {
 
     //TODO Add logging and security aspects
 
+    @CrossOrigin
     @PostMapping("/employee")
     public Employee registerEmployee(@RequestBody Employee employee){
         this.employeeService.registerEmployee(employee);
@@ -29,6 +30,7 @@ public class EmployeeController {
         return employee;
     }
 
+    @CrossOrigin
     @AuthorizedAssociate
     @GetMapping("/employee")
     public Set<Employee> getAllEmployees(){
@@ -36,6 +38,7 @@ public class EmployeeController {
         return employees;
     }
 
+    @CrossOrigin
     @AuthorizedAssociate
     @GetMapping("/employee/{id}")
     public Employee getEmployeeById(@PathVariable int id) throws IOException {
@@ -50,6 +53,7 @@ public class EmployeeController {
         }
     }
 
+    @CrossOrigin
     @AuthorizedAssociate
     @GetMapping("/batch/{id}")
     public Set<Employee> getEmployeesByBatchId(@PathVariable int id) throws IOException {
@@ -61,6 +65,7 @@ public class EmployeeController {
         return employees;
     }
 
+    @CrossOrigin
     @AuthorizedAssociate
     @PutMapping("/employee/{id}")
     public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) throws IOException {
@@ -75,6 +80,7 @@ public class EmployeeController {
         }
     }
 
+    @CrossOrigin
     @AuthorizedTrainer
     @DeleteMapping("/employee/{id}")
     public Boolean deleteEmployeeById(@PathVariable int id) throws IOException {

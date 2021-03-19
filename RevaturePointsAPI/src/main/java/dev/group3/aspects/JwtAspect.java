@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -53,7 +54,7 @@ public class JwtAspect {
             logger.error("Method illegally called: " + pjp.getSignature());
             response.sendError(403);
             return null;
-        }else if(!decodedJWT.getClaim("role").equals("trainer")){
+        }else if(!decodedJWT.getClaim("role").asString().equals("trainer")){
             logger.error("Improper permissions to access that endpoint");
             logger.error("Attempt made by employee " + decodedJWT.getClaim("firstName") + " " +decodedJWT.getClaim("lastName") + ", EmployeeID: "+decodedJWT.getClaim("employeeId"));
             logger.error("Method they attempted to access: " + pjp.getSignature());

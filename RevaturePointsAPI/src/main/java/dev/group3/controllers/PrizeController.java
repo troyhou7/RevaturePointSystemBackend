@@ -18,6 +18,7 @@ public class PrizeController {
     @Autowired
     PrizeService prizeService;
 
+    @CrossOrigin
     @AuthorizedTrainer
     @PostMapping("/prize")
     Prize createPrize(@RequestBody Prize prize) {
@@ -27,6 +28,7 @@ public class PrizeController {
         return prize;
     }
 
+    @CrossOrigin
     @AuthorizedAssociate
     @GetMapping("/prize/{id}")
     Prize getPrizeById(@PathVariable int id) {
@@ -34,6 +36,7 @@ public class PrizeController {
         return prize;
     }
 
+    @CrossOrigin
     @AuthorizedAssociate
     @GetMapping("/prize")
     Set<Prize> getAllPrizes() {
@@ -41,6 +44,7 @@ public class PrizeController {
         return prizeSet;
     }
 
+    @CrossOrigin
     @AuthorizedTrainer
     @PostMapping("/prize/{id}")
     Prize updatePrize(@PathVariable int id, @RequestBody Prize prize) {
@@ -49,6 +53,7 @@ public class PrizeController {
         return prize;
     }
 
+    @CrossOrigin
     @AuthorizedTrainer
     @DeleteMapping("/prize/{id}")
     boolean deletePrizeById(@PathVariable int id) {
