@@ -40,6 +40,9 @@ public class Employee {
     @Column(name = "batch_id")
     private int batchId;
 
+    @Column(name = "img_URL")
+    private String imgURL;
+
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "employee_prize",
@@ -49,7 +52,8 @@ public class Employee {
 
 
     public Employee(){}
-    public Employee(int employeeId, String role, String fname, String lname, String username, String password, int currentRevaPoints, int allTimeRevaPoints, int batchId) {
+
+    public Employee(int employeeId, String role, String fname, String lname, String username, String password, int currentRevaPoints, int allTimeRevaPoints, int batchId, String imgURL) {
         this.employeeId = employeeId;
         this.role = role;
         this.fname = fname;
@@ -59,6 +63,7 @@ public class Employee {
         this.currentRevaPoints = currentRevaPoints;
         this.allTimeRevaPoints = allTimeRevaPoints;
         this.batchId = batchId;
+        this.imgURL = imgURL;
     }
 
     public int getEmployeeId() {
@@ -141,6 +146,14 @@ public class Employee {
         this.prizes = prizes;
     }
 
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -153,6 +166,7 @@ public class Employee {
                 ", currentRevaPoints=" + currentRevaPoints +
                 ", allTimeRevaPoints=" + allTimeRevaPoints +
                 ", batchId=" + batchId +
+                ", imgURL='" + imgURL + '\'' +
                 ", prizes=" + prizes +
                 '}';
     }

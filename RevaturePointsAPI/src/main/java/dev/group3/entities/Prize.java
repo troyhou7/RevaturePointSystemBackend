@@ -20,14 +20,26 @@ public class Prize {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "img_URL")
+    private String imgURL;
+
 
     public Prize(){}
 
-    public Prize(int prizeId, String name, double cost, String description) {
+    public Prize(int prizeId, String name, double cost, String description, String imgURL) {
         this.prizeId = prizeId;
         this.name = name;
         this.cost = cost;
         this.description = description;
+        this.imgURL = imgURL;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     public int getPrizeId() {
@@ -70,6 +82,8 @@ public class Prize {
                 ", name='" + name + '\'' +
                 ", cost=" + cost +
                 ", description='" + description + '\'' +
+                ", imgURL='" + imgURL + '\'' +
                 '}';
     }
+
 }
