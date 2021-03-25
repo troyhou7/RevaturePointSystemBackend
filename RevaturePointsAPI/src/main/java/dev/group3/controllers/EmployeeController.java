@@ -108,9 +108,11 @@ public class EmployeeController {
             HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
             response.sendError(404, "Employee of ID " + id + " not found");
             return null;
-        }else{
-            return updatedEmployee;
+        }else if(updatedEmployee.getPrizes().size() != employee.getPrizes().size()){
+            HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+            response.sendError(400, "Employee " + id + "does not have enough points to redeem that prize");
         }
+        return updatedEmployee;
     }
 
     @CrossOrigin
