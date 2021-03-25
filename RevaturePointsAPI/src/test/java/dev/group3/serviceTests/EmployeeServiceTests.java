@@ -186,4 +186,75 @@ public class EmployeeServiceTests {
 
         Assertions.assertNotNull(employee);
     }
+
+    /**
+     * expected to fail tests
+     */
+
+    @Test
+    void getEmployeeByIdFailTest() {
+        Employee employee = employeeService.getEmployeeById(Integer.MAX_VALUE);
+
+        Assertions.assertNull(employee);
+
+        employee = employeeService.getEmployeeById(0);
+
+        Assertions.assertNull(employee);
+
+        employee = employeeService.getEmployeeById(-1);
+
+        Assertions.assertNull(employee);
+
+        employee = employeeService.getEmployeeById('?');
+
+        Assertions.assertNull(employee);
+    }
+
+    @Test
+    void getEmployeesByBatchFailTest() {
+        Set<Employee> employees = employeeService.getEmployeesByBatch(-1);
+
+        Assertions.assertNull(employees);
+
+        employees = employeeService.getEmployeesByBatch(Integer.MAX_VALUE);
+
+        Assertions.assertNull(employees);
+    }
+
+    @Test
+    void getAllEmployeesByRollFailTest() {
+        Set<Employee> employees = employeeService.getEmployeesByRole("NotARealRoll");
+
+        Assertions.assertNull(employees);
+    }
+
+    @Test
+    void getEmployeePrizesFailTest() {
+        Set<Prize> prizes = employeeService.getEmployeePrizes(2);
+
+        Assertions.assertEquals(0, prizes.size());
+
+        prizes = employeeService.getEmployeePrizes(Integer.MAX_VALUE);
+
+        Assertions.assertNull(prizes);
+
+        prizes = employeeService.getEmployeePrizes(-1);
+
+        Assertions.assertNull(prizes);
+    }
+
+    @Test
+    void getEmployeeByUserPassFailTest() {
+        String correctUser = "PHoskovec";
+        String correctPass = "password";
+
+        Employee employee = employeeService.getEmployeeByUserPass(correctUser, "wrongPassword");
+        Assertions.assertNull(employee);
+
+        employee = employeeService.getEmployeeByUserPass("incorectUser", correctPass);
+        Assertions.assertNull(employee);
+
+        employee = employeeService.getEmployeeByUserPass("incorectUser", "wrongPassword");
+        Assertions.assertNull(employee);
+    }
 }
