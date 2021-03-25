@@ -31,10 +31,12 @@ public class PrizeServiceTestsMockito {
 
     @BeforeEach
     void setUp(){
-        Prize p1 = new Prize(1,"Trip",1000000,"Trip to Hawaii","x");
-        Prize p2 = new Prize(2,"Candle",100,"A nice smelling candle","x");
-        Prize p3 = new Prize(3,"TV",10000,"A 40 inch 4k TV!","x");
-        Prize p4 = new Prize(4,"Car",200000,"Honda Civic","x");
+
+        Prize p1 = new Prize(1,"Trip",1000000,"Trip to Hawaii", "www.imageLocation.com");
+        Prize p2 = new Prize(2,"Candle",100,"A nice smelling candle", "www.imageLocation.com");
+        Prize p3 = new Prize(3,"TV",10000,"A 40 inch 4k TV!", "www.imageLocation.com");
+        Prize p4 = new Prize(4,"Car",200000,"Honda Civic", "www.imageLocation.com");
+
 
         Set<Prize> prizes = new HashSet<>();
 

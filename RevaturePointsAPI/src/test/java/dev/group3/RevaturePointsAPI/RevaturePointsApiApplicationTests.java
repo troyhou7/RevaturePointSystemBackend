@@ -19,14 +19,17 @@ class RevaturePointsApiApplicationTests {
 
 	@Test
 	void create_employee(){
-		Employee e1 = new Employee(0,"associate","John","Tester","jtest","password",10,10,0,"x");
+
+		Employee e1 = new Employee(0,"associate","John","Tester","jtest","password",10,10,0, "www.imageLocation.com");
 
 		this.employeeRepo.save(e1);
 	}
 
 	@Test
 	void create_prize(){
-		Prize p1 = new Prize(0,"Vacation",100000,"Trip to Hawaii!","x");
+
+		Prize p1 = new Prize(0,"Vacation",100000,"Trip to Hawaii!", "www.imageLocation.com");
+
 		this.prizeRepo.save(p1);
 	}
 
