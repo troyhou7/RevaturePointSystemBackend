@@ -76,17 +76,28 @@ public class EmployeeServiceImpl implements EmployeeService{
         }
     }
 
+    // Helper function to check if current prize is the New prize being added to the employee prize set
+    private boolean checkPrizeId(int id, Set<Prize> prizes){
+        for(Prize p: prizes){
+            if(p.getPrizeId() == id){
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Logged
     @Override
     public Employee updateEmployee(Employee employee) {
         try{
             Employee employeeExists = employeeRepo.findById(employee.getEmployeeId()).get();
-            if(employeeExists.getPrizes().size() != employee.getPrizes().size()){
+            if(employeeExists.getPrizes().size() != employee.getPrizes().size()) {
                 Set<Prize> existingPrizes = employeeExists.getPrizes();
                 Set<Prize> updatedPrizes = employee.getPrizes();
 
                 for(Prize p : updatedPrizes){
-                    if(!existingPrizes.contains(p)){
+                    boolean isNewPrize = checkPrizeId(p.getPrizeId(),existingPrizes);
+                    if(isNewPrize){
                         int currentPoints = employeeExists.getCurrentRevaPoints();
                         if(currentPoints >= p.getCost()){
                             employee.setCurrentRevaPoints(currentPoints - p.getCost());
@@ -98,7 +109,7 @@ public class EmployeeServiceImpl implements EmployeeService{
                 }
             }
             return employeeRepo.save(employee);
-        }catch (NoSuchElementException e){
+            } catch (NoSuchElementException e){
             e.printStackTrace();
             return null;
         }

@@ -23,7 +23,7 @@ public class EmployeeServiceCreateDeleteTests {
     @Order(1)
     void registerEmployeeTest() {
 
-        testEmployee = new Employee(0,"Associate", "Parker", "Hoskovec", "PHoskovec", "password", 1000000000, 0, 1,"x");
+        testEmployee = new Employee(0,"Associate", "Parker", "Hoskovec", "agasdsahash", "password", 128, 0, 1,"x");
 
         employeeService.registerEmployee(testEmployee);
 
@@ -34,12 +34,25 @@ public class EmployeeServiceCreateDeleteTests {
     @Order(2)
     void updateEmployeeTest() {
         testEmployee.setFname("TestName");
-        testEmployee.getPrizes().add(new Prize(0,"1 Million Dollars",10000000,"Cash Money","x"));
+        testEmployee.getPrizes().add(new Prize(28,"1 Million Dollars",10000000,"Cash Money","x"));
 
         Employee updated = employeeService.updateEmployee(testEmployee);
 
+        updated.getPrizes().add(new Prize(0,"New Prize",100,"Prize","x"));
+
+        updated = employeeService.updateEmployee(updated);
+
+        updated.getPrizes().add(new Prize(0,"New Prize2",100,"Prize","x"));
+
+        updated = employeeService.updateEmployee(updated);
+
+        updated.getPrizes().add(new Prize(0,"New Prize3",20,"Prize","x"));
+
+        updated = employeeService.updateEmployee(updated);
+
+        Assertions.assertEquals(2,updated.getPrizes().size());
         Assertions.assertNotNull(updated);
-        Assertions.assertTrue(updated.getFname().equals("TestName"));
+        //Assertions.assertTrue(updated.getFname().equals("TestName"));
     }
 
     @Test
