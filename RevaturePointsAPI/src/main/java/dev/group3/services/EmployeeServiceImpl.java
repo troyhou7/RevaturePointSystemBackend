@@ -81,6 +81,22 @@ public class EmployeeServiceImpl implements EmployeeService{
     public Employee updateEmployee(Employee employee) {
         try{
             Employee employeeExists = employeeRepo.findById(employee.getEmployeeId()).get();
+            if(employeeExists.getPrizes().size() != employee.getPrizes().size()){
+                Set<Prize> existingPrizes = employeeExists.getPrizes();
+                Set<Prize> updatedPrizes = employee.getPrizes();
+
+                for(Prize p : updatedPrizes){
+                    if(!existingPrizes.contains(p)){
+                        int currentPoints = employeeExists.getCurrentRevaPoints();
+                        if(currentPoints >= p.getCost()){
+                            employee.setCurrentRevaPoints(currentPoints - p.getCost());
+                            employeeExists.setCurrentRevaPoints(currentPoints - p.getCost());
+                        }else{ // Return existing employee if employee does not have enough points
+                            return employeeExists;
+                        }
+                    }
+                }
+            }
             return employeeRepo.save(employee);
         }catch (NoSuchElementException e){
             e.printStackTrace();

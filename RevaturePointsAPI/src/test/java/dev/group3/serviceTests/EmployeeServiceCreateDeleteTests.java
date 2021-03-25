@@ -2,6 +2,7 @@ package dev.group3.serviceTests;
 
 import dev.group3.RevaturePointsAPI.RevaturePointsApiApplication;
 import dev.group3.entities.Employee;
+import dev.group3.entities.Prize;
 import dev.group3.services.EmployeeService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class EmployeeServiceCreateDeleteTests {
     @Test
     @Order(1)
     void registerEmployeeTest() {
-        testEmployee = new Employee(0,"Associate", "Parker", "Hoskovec", "PHoskovec", "password", 0, 0, 1, "www.imageLocation.com");
+
+        testEmployee = new Employee(0,"Associate", "Parker", "Hoskovec", "PHoskovec", "password", 1000000000, 0, 1,"x");
 
         employeeService.registerEmployee(testEmployee);
 
@@ -32,6 +34,7 @@ public class EmployeeServiceCreateDeleteTests {
     @Order(2)
     void updateEmployeeTest() {
         testEmployee.setFname("TestName");
+        testEmployee.getPrizes().add(new Prize(0,"1 Million Dollars",10000000,"Cash Money","x"));
 
         Employee updated = employeeService.updateEmployee(testEmployee);
 
