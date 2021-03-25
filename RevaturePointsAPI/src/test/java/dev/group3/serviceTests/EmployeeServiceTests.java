@@ -216,18 +216,18 @@ public class EmployeeServiceTests {
     void getEmployeesByBatchFailTest() {
         Set<Employee> employees = employeeService.getEmployeesByBatch(-1);
 
-        Assertions.assertNull(employees);
+        Assertions.assertEquals(0, employees.size());
 
         employees = employeeService.getEmployeesByBatch(Integer.MAX_VALUE);
 
-        Assertions.assertNull(employees);
+        Assertions.assertEquals(0, employees.size());
     }
 
     @Test
     void getAllEmployeesByRollFailTest() {
         Set<Employee> employees = employeeService.getEmployeesByRole("NotARealRoll");
 
-        Assertions.assertNull(employees);
+        Assertions.assertEquals(0, employees.size());
     }
 
     @Test

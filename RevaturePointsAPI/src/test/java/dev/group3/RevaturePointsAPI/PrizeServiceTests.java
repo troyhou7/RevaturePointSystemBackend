@@ -69,4 +69,14 @@ public class PrizeServiceTests {
         Assertions.assertTrue(deleted);
     }
 
+    /**
+     * Fail Tests
+     */
+
+    @Test
+    void get_prize_by_id_Fail_Test() {
+        Prize prize = this.prizeService.getPrizeById(Integer.MAX_VALUE);
+
+        Assertions.assertNull(prize);
+    }
 }
