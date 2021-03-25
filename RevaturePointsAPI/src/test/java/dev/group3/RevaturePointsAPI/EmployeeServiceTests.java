@@ -20,13 +20,6 @@ public class EmployeeServiceTests {
     @Autowired
     EmployeeService employeeService;
 
-    @Autowired
-    PrizeRepo prizeRepo;
-
-    @Autowired
-    EmployeeRepo employeeRepo;
-
-
 
     @Test
     void get_prizes_by_employee_id(){

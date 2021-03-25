@@ -15,7 +15,7 @@ public class Prize {
     private String name;
 
     @Column(name = "prize_cost")
-    private double cost;
+    private int cost;
 
     @Column(name = "description")
     private String description;
@@ -26,7 +26,7 @@ public class Prize {
 
     public Prize(){}
 
-    public Prize(int prizeId, String name, double cost, String description, String imgURL) {
+    public Prize(int prizeId, String name, int cost, String description, String imgURL) {
         this.prizeId = prizeId;
         this.name = name;
         this.cost = cost;
@@ -58,11 +58,11 @@ public class Prize {
         this.name = name;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 
