@@ -21,7 +21,7 @@ public class EmployeeServiceCreateDeleteTests {
     @Test
     @Order(1)
     void registerEmployeeTest() {
-        testEmployee = new Employee(0,"Associate", "Parker", "Hoskovec", "PHoskovec", "password", 0, 0, 1);
+        testEmployee = new Employee(0,"Associate", "Parker", "Hoskovec", "PHoskovec", "password", 0, 0, 1, "www.imageLocation.com");
 
         employeeService.registerEmployee(testEmployee);
 

@@ -24,4 +24,11 @@ public class JwtTests {
         Assertions.assertTrue(firstName.equals("Adam"));
     }
 
+    @Test
+    void decode_incorrect_jwt() {
+        String token = "eyJ0eXAiOiJQiLCJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZGFtIiwibGFzdE5hbWUiOiJSYW5pZXJpIiwicm9sZSI6InRyYWluZXIiLCJlbXBsb3llZUlkIjoxfQ.QPEqf62fv3_fg8OycIMc9A2qvfBSL7ioMtNKBAZsk6U";
+        DecodedJWT jwt = JwtUtil.verifyToken(token);
+
+        Assertions.assertNull(jwt);
+    }
 }

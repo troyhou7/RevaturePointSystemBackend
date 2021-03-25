@@ -30,9 +30,9 @@ public class EmployeeServiceTests {
 
     @BeforeEach
     void beforeAll() {
-        Employee e1 = new Employee(1,"Associate", "Parker", "Hoskovec", "PHoskovec", "password", 0, 0, 1);
-        Employee e2 = new Employee(1,"Trainer", "Xianbin", "Zhen", "XZhen", "password", 0, 0, 1);
-        Employee e3 = new Employee(1,"Associate", "Troy", "Houston", "THouston", "password", 0, 0, 2);
+        Employee e1 = new Employee(1,"Associate", "Parker", "Hoskovec", "PHoskovec", "password", 0, 0, 1, "www.imageLocation.com");
+        Employee e2 = new Employee(1,"Trainer", "Xianbin", "Zhen", "XZhen", "password", 0, 0, 1, "www.imageLocation.com");
+        Employee e3 = new Employee(1,"Associate", "Troy", "Houston", "THouston", "password", 0, 0, 2, "www.imageLocation.com");
 
         Set<Employee> employees = new HashSet<>();
         employees.add(e1);
@@ -54,8 +54,8 @@ public class EmployeeServiceTests {
         associates.add(e3);
 
         Set<Prize> prizes = new HashSet<>();
-        prizes.add(new Prize(1, "Reva Points", 500, "reva points for reva points?"));
-        prizes.add(new Prize(1, "A new car!", 500, "made by micro machines"));
+        prizes.add(new Prize(1, "Reva Points", 500, "reva points for reva points?", "www.imageLocation.com"));
+        prizes.add(new Prize(1, "A new car!", 500, "made by micro machines", "www.imageLocation.com"));
 
         e1.setPrizes(prizes);
 

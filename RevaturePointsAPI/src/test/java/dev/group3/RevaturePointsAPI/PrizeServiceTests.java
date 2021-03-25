@@ -34,7 +34,7 @@ public class PrizeServiceTests {
     @Test
     @Order(1)
     void create_prize(){
-        Prize prize = new Prize(0,"Ford Mustang", 1000000, "A brand new car for one hard working associate!");
+        Prize prize = new Prize(0,"Ford Mustang", 1000000, "A brand new car for one hard working associate!", "www.imageLocation.com");
         this.prizeService.createPrize(prize);
 
         prizeId = prize.getPrizeId();
