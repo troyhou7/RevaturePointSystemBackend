@@ -1,0 +1,73 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EmployeeService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">dev.group3.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EmployeeService (dev.group3.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">EmployeeService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package dev.group3.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import dev.group3.entities.Employee;
+<i>4</i>&nbsp;import dev.group3.entities.Prize;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.Set;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public interface EmployeeService {
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    Employee registerEmployee(Employee employee);
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    Employee getEmployeeById(int id);
+<i>13</i>&nbsp;    Set&lt;Employee&gt; getEmployeesByBatch(int batchId);
+<i>14</i>&nbsp;    Set&lt;Employee&gt; getAllEmployees();
+<i>15</i>&nbsp;    Employee getEmployeeByUserPass(String username, String password);
+<i>16</i>&nbsp;    Set&lt;Employee&gt; getEmployeesByRole(String role);
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    Set&lt;Prize&gt; getEmployeePrizes(int id);
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    Employee updateEmployee(Employee employee);
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    boolean deleteEmployeeById(int id);
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    Employee getEmployeeByUsername(String username);
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-03-26 14:08</div>
+</div>
+</body>
+</html>

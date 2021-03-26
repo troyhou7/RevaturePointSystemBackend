@@ -1,0 +1,170 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PrizeServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">dev.group3.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PrizeServiceImpl (dev.group3.services)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrizeServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (15/ 21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PrizeServiceImpl$$EnhancerBySpringCGLIB$$61ef566c</td>
+  </tr>
+  <tr>
+    <td class="name">PrizeServiceImpl$$EnhancerBySpringCGLIB$$61ef566c$$FastClassBySpringCGLIB$$62be94d1</td>
+  </tr>
+  <tr>
+    <td class="name">PrizeServiceImpl$$FastClassBySpringCGLIB$$7a9a8192</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (15/ 21)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package dev.group3.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import dev.group3.aspects.Logged;
+<i>4</i>&nbsp;import dev.group3.entities.Prize;
+<i>5</i>&nbsp;import dev.group3.repos.PrizeRepo;
+<i>6</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>7</i>&nbsp;import org.springframework.stereotype.Component;
+<i>8</i>&nbsp;import org.springframework.stereotype.Service;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.util.Collection;
+<i>11</i>&nbsp;import java.util.HashSet;
+<i>12</i>&nbsp;import java.util.NoSuchElementException;
+<i>13</i>&nbsp;import java.util.Set;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;@Component
+<i>16</i>&nbsp;@Service
+<b class="fc"><i>17</i>&nbsp;public class PrizeServiceImpl implements PrizeService{</b>
+<i>18</i>&nbsp;    @Autowired
+<i>19</i>&nbsp;    PrizeRepo prizeRepo;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    @Logged
+<i>22</i>&nbsp;    @Override
+<i>23</i>&nbsp;    public Prize createPrize(Prize prize) {
+<b class="fc"><i>24</i>&nbsp;        this.prizeRepo.save(prize);</b>
+<b class="fc"><i>25</i>&nbsp;        return prize;</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Logged
+<i>29</i>&nbsp;    @Override
+<i>30</i>&nbsp;    public Prize getPrizeById(int id) {
+<i>31</i>&nbsp;        try {
+<b class="fc"><i>32</i>&nbsp;            Prize p = this.prizeRepo.findById(id).get();</b>
+<b class="fc"><i>33</i>&nbsp;            return p;</b>
+<b class="fc"><i>34</i>&nbsp;        }catch (NoSuchElementException e){</b>
+<b class="fc"><i>35</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i>36</i>&nbsp;            return null;</b>
+<i>37</i>&nbsp;        }
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    @Logged
+<i>41</i>&nbsp;    @Override
+<i>42</i>&nbsp;    public Set&lt;Prize&gt; getAllPrizes() {
+<b class="fc"><i>43</i>&nbsp;        Set&lt;Prize&gt; prizes = new HashSet&lt;&gt;((Collection&lt;? extends Prize&gt;) this.prizeRepo.findAll());</b>
+<b class="fc"><i>44</i>&nbsp;        return prizes;</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    @Logged
+<i>48</i>&nbsp;    @Override
+<i>49</i>&nbsp;    public Prize updatePrize(Prize prize) {
+<i>50</i>&nbsp;        try{
+<b class="fc"><i>51</i>&nbsp;            Prize prizeExists = prizeRepo.findById(prize.getPrizeId()).get();</b>
+<b class="fc"><i>52</i>&nbsp;            return this.prizeRepo.save(prize);</b>
+<b class="nc"><i>53</i>&nbsp;        }catch (NoSuchElementException e){</b>
+<b class="nc"><i>54</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>55</i>&nbsp;            return null;</b>
+<i>56</i>&nbsp;        }
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    @Logged
+<i>60</i>&nbsp;    @Override
+<i>61</i>&nbsp;    public boolean deletePrizeById(int id) {
+<i>62</i>&nbsp;        try {
+<b class="fc"><i>63</i>&nbsp;            Prize prize = this.prizeRepo.findById(id).get(); // Throws exception if element does not exist</b>
+<b class="fc"><i>64</i>&nbsp;            this.prizeRepo.deleteById(id);</b>
+<b class="fc"><i>65</i>&nbsp;            return true;</b>
+<b class="nc"><i>66</i>&nbsp;        }catch (NoSuchElementException e){</b>
+<b class="nc"><i>67</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>68</i>&nbsp;            return false;</b>
+<i>69</i>&nbsp;        }
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-03-26 14:08</div>
+</div>
+</body>
+</html>
