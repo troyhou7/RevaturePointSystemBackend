@@ -1,0 +1,175 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PrizeController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">dev.group3.controllers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PrizeController (dev.group3.controllers)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrizeController</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.8%
+  </span>
+  <span class="absValue">
+    (1/ 26)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PrizeController$$EnhancerBySpringCGLIB$$7d9451a6</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.8%
+  </span>
+  <span class="absValue">
+    (1/ 26)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package dev.group3.controllers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import dev.group3.aspects.AuthorizedAssociate;
+<i>4</i>&nbsp;import dev.group3.aspects.AuthorizedTrainer;
+<i>5</i>&nbsp;import dev.group3.entities.Prize;
+<i>6</i>&nbsp;import dev.group3.services.PrizeService;
+<i>7</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>8</i>&nbsp;import org.springframework.web.bind.annotation.*;
+<i>9</i>&nbsp;import org.springframework.web.context.request.RequestContextHolder;
+<i>10</i>&nbsp;import org.springframework.web.context.request.ServletRequestAttributes;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import javax.servlet.http.HttpServletResponse;
+<i>13</i>&nbsp;import javax.servlet.http.HttpServletResponse;
+<i>14</i>&nbsp;import java.io.IOException;
+<i>15</i>&nbsp;import java.util.Set;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;@RestController
+<b class="fc"><i>18</i>&nbsp;public class PrizeController {</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    @Autowired
+<i>21</i>&nbsp;    PrizeService prizeService;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    @CrossOrigin
+<i>24</i>&nbsp;    @AuthorizedTrainer
+<i>25</i>&nbsp;    @PostMapping(&quot;/prize&quot;)
+<i>26</i>&nbsp;    Prize createPrize(@RequestBody Prize prize) {
+<b class="nc"><i>27</i>&nbsp;        this.prizeService.createPrize(prize);</b>
+<b class="nc"><i>28</i>&nbsp;        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();</b>
+<b class="nc"><i>29</i>&nbsp;        response.setStatus(201);</b>
+<b class="nc"><i>30</i>&nbsp;        return prize;</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @CrossOrigin
+<i>34</i>&nbsp;    @AuthorizedAssociate
+<i>35</i>&nbsp;    @GetMapping(&quot;/prize/{id}&quot;)
+<i>36</i>&nbsp;    Prize getPrizeById(@PathVariable int id) throws IOException {
+<b class="nc"><i>37</i>&nbsp;        Prize prize = this.prizeService.getPrizeById(id);</b>
+<b class="nc"><i>38</i>&nbsp;        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();</b>
+<b class="nc"><i>39</i>&nbsp;        if(prize == null) {</b>
+<b class="nc"><i>40</i>&nbsp;            response.sendError(404, &quot;Prize with id &quot; + id + &quot; not found&quot;);</b>
+<b class="nc"><i>41</i>&nbsp;            return null;</b>
+<i>42</i>&nbsp;        }
+<b class="nc"><i>43</i>&nbsp;        return prize;</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    @CrossOrigin
+<i>47</i>&nbsp;    @AuthorizedAssociate
+<i>48</i>&nbsp;    @GetMapping(&quot;/prize&quot;)
+<i>49</i>&nbsp;    Set&lt;Prize&gt; getAllPrizes() {
+<b class="nc"><i>50</i>&nbsp;        Set&lt;Prize&gt; prizeSet = this.prizeService.getAllPrizes();</b>
+<b class="nc"><i>51</i>&nbsp;        return prizeSet;</b>
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    @CrossOrigin
+<i>55</i>&nbsp;    @AuthorizedTrainer
+<i>56</i>&nbsp;    @PostMapping(&quot;/prize/{id}&quot;)
+<i>57</i>&nbsp;    Prize updatePrize(@PathVariable int id, @RequestBody Prize prize) throws IOException {
+<b class="nc"><i>58</i>&nbsp;        prize.setPrizeId(id);</b>
+<b class="nc"><i>59</i>&nbsp;        Prize  returnPrize = this.prizeService.getPrizeById(id);</b>
+<b class="nc"><i>60</i>&nbsp;        this.prizeService.updatePrize(prize);</b>
+<b class="nc"><i>61</i>&nbsp;        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();</b>
+<b class="nc"><i>62</i>&nbsp;        if(returnPrize == null) {</b>
+<b class="nc"><i>63</i>&nbsp;            response.sendError(404, &quot;Prize with id &quot; + id + &quot; not found&quot;);</b>
+<b class="nc"><i>64</i>&nbsp;            return null;</b>
+<i>65</i>&nbsp;        }
+<b class="nc"><i>66</i>&nbsp;        return prize;</b>
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @CrossOrigin
+<i>70</i>&nbsp;    @AuthorizedTrainer
+<i>71</i>&nbsp;    @DeleteMapping(&quot;/prize/{id}&quot;)
+<i>72</i>&nbsp;    boolean deletePrizeById(@PathVariable int id) throws IOException {
+<b class="nc"><i>73</i>&nbsp;        Boolean result = this.prizeService.deletePrizeById(id);</b>
+<b class="nc"><i>74</i>&nbsp;        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();</b>
+<b class="nc"><i>75</i>&nbsp;        if(!result) {</b>
+<b class="nc"><i>76</i>&nbsp;            response.sendError(404, &quot;Prize with id &quot; + id + &quot; not found&quot;);</b>
+<i>77</i>&nbsp;        }
+<b class="nc"><i>78</i>&nbsp;        return result;</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-03-26 14:08</div>
+</div>
+</body>
+</html>
