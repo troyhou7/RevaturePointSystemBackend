@@ -25,3 +25,9 @@ To-do list:
 ## Getting Started
 * git clone backend https://github.com/troyhou7/RevaturePointSystemBackend.git
 * git clone frontend https://github.com/XianbinZhen/RevaturePointSystem.git
+
+## Contributors
+* Troy Houston
+* Michael Glenn
+* Xianbin Zhen
+* Parker Hoskovec
